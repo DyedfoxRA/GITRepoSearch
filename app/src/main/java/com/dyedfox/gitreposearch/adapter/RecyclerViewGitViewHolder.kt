@@ -15,6 +15,8 @@ class RecyclerViewGitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
 
     private var url_repo : TextView = itemView.url_repo
 
+    private  var description_repo : TextView = itemView.description_repo
+
     fun getNameOfRepo() = name_repo
 
     fun getOwnerOfRepo() = owner_repo
@@ -22,4 +24,6 @@ class RecyclerViewGitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
     fun getLanguageOfRepo() = language_repo
 
     fun getUrlOfRepo() = url_repo
+
+    fun getDescription() = description_repo
 }

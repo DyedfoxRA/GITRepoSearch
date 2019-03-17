@@ -34,6 +34,9 @@ class RecyclerViewGitAdapter(val listOfItems: List<Item>, val context: Context) 
         holder.getUrlOfRepo().let{
             it.text = item.url
         }
+        holder.getDescription().let {
+            it.text = item.description
+        }
     }
 }
 
