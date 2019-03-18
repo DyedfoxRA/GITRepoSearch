@@ -22,6 +22,9 @@ class MainPresenter(val activity: MainActivity) : BasePresenter() {
     {
         launch {
             mainUseCase.getReposResponse(name).let {
+                if(it.isNullOrEmpty())
+                    listOfRepoResponse.isEmpty()
+                else
                 listOfRepoResponse.addAll(it)
                 withContext(Dispatchers.Main)
                 {
