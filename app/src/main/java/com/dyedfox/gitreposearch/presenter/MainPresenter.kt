@@ -18,10 +18,10 @@ class MainPresenter(val activity: MainActivity) : BasePresenter() {
 
     private lateinit var adapter: RecyclerViewGitAdapter
 
-    fun getRepositories()
+    fun getRepositories(name : String)
     {
         launch {
-            mainUseCase.getReposResponse("tetris").let {
+            mainUseCase.getReposResponse(name).let {
                 listOfRepoResponse.addAll(it)
                 withContext(Dispatchers.Main)
                 {
@@ -32,12 +32,18 @@ class MainPresenter(val activity: MainActivity) : BasePresenter() {
         }
     }
 
-    fun initRecycler() {
+    fun initRecycler(name: String) {
         adapter = RecyclerViewGitAdapter(listOfRepoResponse, activity)
         activity.recycler_view_repo.layoutManager = LinearLayoutManager(activity)
         activity.recycler_view_repo.adapter = adapter
-        getRepositories()
+        getRepositories(name)
+    }
 
-
+    fun clearRecycler()
+    {
+        listOfRepoResponse.clear()
+        adapter = RecyclerViewGitAdapter(listOfRepoResponse, activity)
+        activity.recycler_view_repo.layoutManager = LinearLayoutManager(activity)
+        activity.recycler_view_repo.adapter = adapter
     }
 }
