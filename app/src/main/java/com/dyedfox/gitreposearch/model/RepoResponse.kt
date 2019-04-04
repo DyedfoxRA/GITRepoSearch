@@ -1,6 +1,5 @@
 package com.dyedfox.gitreposearch.model
 
-import com.dyedfox.gitreposearch.model.entity.Item
 import com.google.gson.annotations.SerializedName
 
 data class RepoResponse(

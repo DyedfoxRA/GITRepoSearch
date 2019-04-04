@@ -2,21 +2,17 @@ package com.dyedfox.gitreposearch.useCases
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.dyedfox.gitreposearch.GitRepoApp.Companion.networkHelper
-import com.dyedfox.gitreposearch.repo.network.NetworkHelper
+import com.dyedfox.gitreposearch.App.Companion.context
 
-open class BaseUseCase(val context: Context) {
+open class BaseUseCase() {
 
-    fun getNetworkHelper(): NetworkHelper {
-        if (networkHelper == null)
-            networkHelper = NetworkHelper()
-
-        return networkHelper!!
-    }
 
     fun checkNetworkConnection(): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo != null && networkInfo.isConnected
+        return if (context != null) {
+            val connectivityManager = context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkInfo = connectivityManager.activeNetworkInfo
+            networkInfo != null && networkInfo.isConnected
+        } else
+            false
     }
 }

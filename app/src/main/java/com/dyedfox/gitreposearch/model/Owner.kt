@@ -1,4 +1,4 @@
-package com.dyedfox.gitreposearch.model.entity
+package com.dyedfox.gitreposearch.model
 
 import com.google.gson.annotations.SerializedName
 

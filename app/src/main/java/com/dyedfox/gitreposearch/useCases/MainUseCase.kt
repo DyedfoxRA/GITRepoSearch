@@ -1,22 +1,25 @@
 package com.dyedfox.gitreposearch.useCases
 
-import android.content.Context
 import android.util.Log
-import com.dyedfox.gitreposearch.model.entity.Item
+import com.dyedfox.gitreposearch.utils.NetworkHelper
+import com.dyedfox.gitreposearch.model.Item
 
 
-class MainUseCase(context_: Context) : BaseUseCase(context_) {
+class MainUseCase() : BaseUseCase() {
 
-    suspend fun getReposResponse(name : String): List<Item>? {
-        if(checkNetworkConnection())
-        {val resp = getNetworkHelper()
-            .client
-            .getRepos(name)
-            .await()
-            .body()?.items
-
-        Log.e("res",resp.toString())
-            return resp}
-        else return emptyList()
+    suspend fun getReposResponse(name: String): List<Item>? {
+        if (checkNetworkConnection()) {
+            NetworkHelper
+                .getClient()
+                .getRepos(name)
+                .await()
+                .let {
+                    Log.e("ListSize1", it.body()?.items?.size.toString())
+                    return when (it.code()) {
+                        200 -> it.body()?.items
+                        else -> emptyList()
+                    }
+                }
+        } else return emptyList()
     }
 }

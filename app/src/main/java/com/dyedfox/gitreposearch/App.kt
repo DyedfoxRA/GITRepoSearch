@@ -1,15 +1,15 @@
 package com.dyedfox.gitreposearch
 
 import android.app.Application
-import com.dyedfox.gitreposearch.repo.network.NetworkHelper
+import android.content.Context
 
-class GitRepoApp: Application() {
-
+class App : Application() {
     companion object {
-        var networkHelper: NetworkHelper? = null
+        var context: Context? = null
     }
 
     override fun onCreate() {
         super.onCreate()
+        context = applicationContext
     }
 }
